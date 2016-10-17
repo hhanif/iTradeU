@@ -8,7 +8,7 @@ module.exports = function(){
   });
 
   app.get('/home', function(req, res){
-    res.send('home');
+    res.sendfile('index.html')
   });
 
   return app;
