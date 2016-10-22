@@ -14,8 +14,6 @@ User.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
-
-
 // app/routes.js
 module.exports = function(app, passport) {
 

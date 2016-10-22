@@ -3,6 +3,7 @@ var express  = require('express');
 var app      = express();
 var port     = process.env.PORT || 8080;
 var mongoose = require('mongoose');
+var mongodb = require('mongodb');
 var passport = require('passport');
 var flash    = require('connect-flash');
 var morgan       = require('morgan');
@@ -18,16 +19,16 @@ mongodb.MongoClient.connect(uri, function(error,db){
     console.log(error);
     process.exit(1);
   }
-  exit(0);
 })
 
 // set up ejs for templating
 app.set('view engine', 'ejs');
 
 // Load Routes
-app.use(express.static(__dirname + '/public'))''
-app.use(require('./middlewares/users'));
-app.use(require('./controllers'));
+//app.use(express.static('/public'));
+//app.use(require('./controllers'));
+//app.use(require('./middlewares'));
+
 
 // pass passport for configuration
 require('./middlewares/passport')(passport);
@@ -44,7 +45,8 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // routes ======================================================================
-//require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./controllers/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
 
 // launch ======================================================================
 app.listen(port);

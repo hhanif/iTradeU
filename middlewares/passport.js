@@ -4,11 +4,12 @@
 var LocalStrategy   = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 // load up the user model
-var User            = require('../app/models/user');
+var User = require('../models/user');
 
 // load the auth variables
-var configAuth = require('./auth');
+var configAuth = require('../helpers/auth');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -47,7 +48,7 @@ module.exports = function(passport) {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
-        User.findOne({ 'local.email' :  email }, function(err, user) {
+        User.findOne({ 'accounts.local.email' :  email }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err)
                 return done(err);
@@ -85,7 +86,7 @@ module.exports = function(passport) {
         process.nextTick(function() {
 
             // find the user in the database based on their facebook id
-            User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+            User.findOne({ 'accounts.facebook.id' : profile.id }, function(err, user) {
 
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
@@ -100,10 +101,10 @@ module.exports = function(passport) {
                     var newUser            = new User();
 
                     // set all of the facebook information in our user model
-                    newUser.facebook.id    = profile.id; // set the users facebook id
-                    newUser.facebook.token = token; // we will save the token that facebook provides to the user
-                    newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
-                    newUser.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
+                    newUser.accounts.facebook.id    = profile.id; // set the users facebook id
+                    newUser.accounts.facebook.token = token; // we will save the token that facebook provides to the user
+                    newUser.accounts.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
+                    newUser.accounts.facebook.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
 
                     // save our user to the database
                     newUser.save(function(err) {
@@ -149,10 +150,10 @@ module.exports = function(passport) {
                     var newUser          = new User();
 
                     // set all of the relevant information
-                    newUser.google.id    = profile.id;
-                    newUser.google.token = token;
-                    newUser.google.name  = profile.displayName;
-                    newUser.google.email = profile.emails[0].value; // pull the first email
+                    newUser.accounts.google.id    = profile.id;
+                    newUser.accounts.google.token = token;
+                    newUser.accounts.google.name  = profile.displayName;
+                    newUser.accounts.google.email = profile.emails[0].value; // pull the first email
 
                     // save the user
                     newUser.save(function(err) {

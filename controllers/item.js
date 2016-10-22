@@ -1,5 +1,5 @@
 //*******************************Packages**********************************
 var mongoose = require('mongoose');
-var Object = require('mongoose').model('Object').schema;
+var Item = require('mongoose').model('Item').schema;
 
 / *********************************Methods**********************************

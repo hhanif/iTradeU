@@ -4,15 +4,14 @@ var mongoose = require('mongoose');
 //********************************Schema*********************************
 //
 var userSchema = new mongoose.Schema({
-  _id{type: Mixed, required: true}
   firstName: { type: String, required: true },
   middleName: { type: String, required: true },
   lastName: { type: String, required: true },
-  dateJoined{ type: Date, default: Date.now},
+  dateJoined: { type: Date, default: Date.now},
   dob: { type: Date, required: true },
-  address { type: String, required: true },
-  rating{ type: Number, required:true}
-  accounts{
+  address: { type: String, required: true },
+  rating: { type: Number, required:true},
+  accounts: {
       local            : {
           email        : String,
           password     : String,
@@ -22,12 +21,6 @@ var userSchema = new mongoose.Schema({
           token        : String,
           email        : String,
           name         : String
-      },
-      twitter          : {
-          id           : String,
-          token        : String,
-          displayName  : String,
-          username     : String
       },
       google           : {
           id           : String,
