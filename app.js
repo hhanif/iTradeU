@@ -10,28 +10,32 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
-app.set('view engine', 'ejs'); // set up ejs for templating
+//***************************Configuration*******************************
+//Connection URL where MongoDB is running
+var uri = 'mongodb://localhost:27017/data'
+mongodb.MongoClient.connect(uri, function(error,db){
+  if(error){
+    console.log(error);
+    process.exit(1);
+  }
+  exit(0);
+})
 
+// set up ejs for templating
+app.set('view engine', 'ejs');
+
+// Load Routes
 app.use(express.static(__dirname + '/public'))''
 app.use(require('./middlewares/users'));
 app.use(require('./controllers'));
 
-// server.js
-
-
-//var configDB = require('./config/database.js');
-
-// configuration ===============================================================
-//mongoose.connect(configDB.url); // connect to our database
-
-require('./config/passport')(passport); // pass passport for configuration
+// pass passport for configuration
+require('./middlewares/passport')(passport);
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
-
-
 
 // required for passport
 app.use(session({ secret: 'itradeuutrademe' })); // session secret

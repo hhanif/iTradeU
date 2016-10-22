@@ -1,7 +1,8 @@
+//*******************************Packages**********************************
 var mongoose = require('mongoose');
 
-var schema = new mongoose.Schema({
-  _id:{type: Mixed, required: true},
+//********************************Schema*********************************
+var itemSchema = new mongoose.Schema({
   user: { type: String, ref:'user', required: true },
   title:{ type: String, required: true },
   description  {type: String, required: true },
@@ -14,4 +15,5 @@ var schema = new mongoose.Schema({
   }
 });
 
-module.exports = schema;
+// Create the module for users and expose it to our app
+module.exports = mongoose.model('Item', itemSchema);
