@@ -96,6 +96,10 @@ module.exports = function(passport) {
                         var newUser            = new User();
 
                         newUser.local.email    = email;
+                        newUser.firstName = req.body.firstName;
+                        newUser.lastName = req.body.lastName;
+                        newUser.dob = req.body.dob;
+                        newUser.address = req.body.adress;
                         newUser.local.password = newUser.generateHash(password);
 
                         newUser.save(function(err) {
@@ -114,7 +118,7 @@ module.exports = function(passport) {
                 User.findOne({ 'local.email' :  email }, function(err, user) {
                     if (err)
                         return done(err);
-                    
+
                     if (user) {
                         return done(null, false, req.flash('loginMessage', 'That email is already taken.'));
                         // Using 'loginMessage instead of signupMessage because it's used by /connect/local'
@@ -125,7 +129,7 @@ module.exports = function(passport) {
                         user.save(function (err) {
                             if (err)
                                 return done(err);
-                            
+
                             return done(null,user);
                         });
                     }
@@ -168,7 +172,7 @@ module.exports = function(passport) {
                             user.save(function(err) {
                                 if (err)
                                     return done(err);
-                                    
+
                                 return done(null, user);
                             });
                         }
@@ -186,7 +190,7 @@ module.exports = function(passport) {
                         newUser.save(function(err) {
                             if (err)
                                 return done(err);
-                                
+
                             return done(null, newUser);
                         });
                     }
@@ -204,7 +208,7 @@ module.exports = function(passport) {
                 user.save(function(err) {
                     if (err)
                         return done(err);
-                        
+
                     return done(null, user);
                 });
 
@@ -246,7 +250,7 @@ module.exports = function(passport) {
                             user.save(function(err) {
                                 if (err)
                                     return done(err);
-                                    
+
                                 return done(null, user);
                             });
                         }
@@ -264,7 +268,7 @@ module.exports = function(passport) {
                         newUser.save(function(err) {
                             if (err)
                                 return done(err);
-                                
+
                             return done(null, newUser);
                         });
                     }
@@ -282,7 +286,7 @@ module.exports = function(passport) {
                 user.save(function(err) {
                     if (err)
                         return done(err);
-                        
+
                     return done(null, user);
                 });
             }
@@ -325,7 +329,7 @@ module.exports = function(passport) {
                             user.save(function(err) {
                                 if (err)
                                     return done(err);
-                                    
+
                                 return done(null, user);
                             });
                         }
@@ -342,7 +346,7 @@ module.exports = function(passport) {
                         newUser.save(function(err) {
                             if (err)
                                 return done(err);
-                                
+
                             return done(null, newUser);
                         });
                     }
@@ -360,7 +364,7 @@ module.exports = function(passport) {
                 user.save(function(err) {
                     if (err)
                         return done(err);
-                        
+
                     return done(null, user);
                 });
 
