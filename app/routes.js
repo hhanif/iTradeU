@@ -1,5 +1,18 @@
 module.exports = function(app, passport) {
 
+// Object routes===============================================================
+/*
+//Rendes createOjbect View
+app.get('/createObject',function(req,res){
+  res.render('../app/view/index.ejs');
+
+});
+
+//Store object
+app.post('/createObject',storeNewObject(req,){
+  res.render('../app/view/index.ejs');
+
+});*/
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
