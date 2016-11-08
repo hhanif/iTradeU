@@ -1,6 +1,23 @@
 {
   "name": "node-authentication",
   "main": "server.js",
+  "author": "Juan D. Cardozo jcardozo@ucsc.edu",
+  "contributors":[{
+    "name":"Haris Hanif",
+    "email":"something"
+    },
+    {
+      "name":"Alina Syrtsova",
+      "email":"something"
+      },
+      {
+        "name":"Andy Wong",
+        "email":"something"
+        },
+  ],
+  "engines": {
+    "node": "4.6.0"
+  },
   "dependencies" : {
     "express": "~4.14.0",
     "ejs": "~2.5.2",
