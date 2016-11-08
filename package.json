@@ -13,7 +13,7 @@
       {
         "name":"Andy Wong",
         "email":"something"
-        },
+        }
   ],
   "engines": {
     "node": "4.6.0"
