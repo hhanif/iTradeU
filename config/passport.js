@@ -166,7 +166,9 @@ module.exports = function(passport) {
                         // if there is a user id already but no token (user was linked at one point and then removed)
                         if (!user.facebook.token) {
                             user.facebook.token = token;
-                            user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                            user.firstName  = profile.name.givenName ;
+                            user.lastName = profile.name.familyName;
+                            user.dob = profile.birthday;
                             user.facebook.email = (profile.emails[0].value || '').toLowerCase();
 
                             user.save(function(err) {
@@ -184,7 +186,9 @@ module.exports = function(passport) {
 
                         newUser.facebook.id    = profile.id;
                         newUser.facebook.token = token;
-                        newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                        user.firstName  = profile.name.givenName ;
+                        user.lastName = profile.name.familyName;
+                        user.dob = profile.birthday;
                         newUser.facebook.email = (profile.emails[0].value || '').toLowerCase();
 
                         newUser.save(function(err) {
@@ -202,7 +206,9 @@ module.exports = function(passport) {
 
                 user.facebook.id    = profile.id;
                 user.facebook.token = token;
-                user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
+                user.firstName  = profile.name.givenName ;
+                user.lastName = profile.name.familyName;
+                user.dob = profile.birthday;
                 user.facebook.email = (profile.emails[0].value || '').toLowerCase();
 
                 user.save(function(err) {
@@ -245,6 +251,7 @@ module.exports = function(passport) {
                         if (!user.twitter.token) {
                             user.twitter.token       = token;
                             user.twitter.username    = profile.username;
+                            user.firstName   = profile.username;
                             user.twitter.displayName = profile.displayName;
 
                             user.save(function(err) {
@@ -263,6 +270,7 @@ module.exports = function(passport) {
                         newUser.twitter.id          = profile.id;
                         newUser.twitter.token       = token;
                         newUser.twitter.username    = profile.username;
+                        newUser.firstName   = profile.username;
                         newUser.twitter.displayName = profile.displayName;
 
                         newUser.save(function(err) {
@@ -341,6 +349,7 @@ module.exports = function(passport) {
                         newUser.google.id    = profile.id;
                         newUser.google.token = token;
                         newUser.google.name  = profile.displayName;
+                        newUser.firstName = profile.displayName;
                         newUser.google.email = (profile.emails[0].value || '').toLowerCase(); // pull the first email
 
                         newUser.save(function(err) {
