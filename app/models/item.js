@@ -7,8 +7,25 @@ var itemSchema = new mongoose.Schema({
   title:{ type: String, required: true },
   description  {type: String, required: true },
   pictures:[{type:Number,required:false}],
-  keyword:[{type:String, required:true}],
-  trade{
+
+  /*match:{
+    keyword1:{
+
+    }
+    keyword2:{
+
+    }
+    keyword3:{
+
+    }
+    keyword4:{
+
+    }
+    keyword5:{
+
+    }
+  },*/
+  trade:{
     status:{type:Number, required:true},
     objectMatch:{type:Number, required:true},
     tradeRating:{type:String, required:true}
