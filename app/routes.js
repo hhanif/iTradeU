@@ -73,7 +73,7 @@ app.post('/createItem',function(req,res){
         // process the login form
         app.post('/login', passport.authenticate('local-login', {
             successRedirect : '/home', // redirect to the secure profile section
-            failureRedirect : '/home', // redirect back to the signup page if there is an error
+            failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
 
