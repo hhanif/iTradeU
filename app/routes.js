@@ -1,18 +1,36 @@
+var path = require('path');
+
+var Item = require('./models/item');
+
 module.exports = function(app, passport) {
-
 // Object routes===============================================================
-/*
-//Rendes createOjbect View
-app.get('/createObject',function(req,res){
-  res.render('../app/view/index.ejs');
 
+//Rendes createOjbect View
+app.get('/createItem',function(req,res){
+  res.render('../app/views/createItem.ejs');
 });
 
 //Store object
-app.post('/createObject',storeNewObject(req,){
-  res.render('../app/view/index.ejs');
+app.post('/createItem',function(req,res){
 
-});*/
+    var newItem   = new Item();
+    newItem.title= req.body.title;
+    newItem.user_id= req.user;
+    newItem.description = req.body.description;
+    newItem.match.keyword1.original = req.body.keyword1;
+    newItem.match.keyword2.original = req.body.keyword2;
+    newItem.match.keyword3.original = req.body.keyword3;
+
+    newItem.save(function (err){
+    if (err){
+        console.log(err);
+}else{
+    console.log('we fucked');}
+});
+    console.log(newItem.title);
+    res.redirect('/profile');
+
+});
 // normal routes ===============================================================
 
     // show the home page (will also have our login links)
@@ -22,7 +40,7 @@ app.post('/createObject',storeNewObject(req,){
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('../app/views/profile.ejs', {
+      res.render('../app/views/profile.ejs', {
             user : req.user
         });
     });

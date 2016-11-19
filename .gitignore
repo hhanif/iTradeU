@@ -13,3 +13,11 @@ results
 
 npm-debug.log
 node_modules
+
+logs/*
+!.gitkeek
+bower_components/
+tmp
+.DS_Store
+.idea
+app/jspm_packages
