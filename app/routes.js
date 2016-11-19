@@ -15,10 +15,11 @@ app.post('/createItem',function(req,res){
 
     var newItem   = new Item();
     newItem.title= req.body.title;
+    newItem.user_id= req.user;
     newItem.description = req.body.description;
-    newItem.match.keyword1.orginal = req.body.keyword1;
-    newItem.match.keyword2.orginal = req.body.keyword2;
-    newItem.match.keyword3.orginal = req.body.keyword3;
+    newItem.match.keyword1.original = req.body.keyword1;
+    newItem.match.keyword2.original = req.body.keyword2;
+    newItem.match.keyword3.original = req.body.keyword3;
 
     newItem.save(function (err){
     if (err){
