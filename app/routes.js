@@ -27,6 +27,14 @@ app.post('/createObject',storeNewObject(req,){
         });
     });
 
+    //HOME PAGE ===================================
+    app.get('/home', isLoggedIn, function(req, res) {
+        res.render('../app/views/home.ejs', {
+            user : req.user,
+            item : req.item
+        });
+    });
+
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
         req.logout();
@@ -46,8 +54,8 @@ app.post('/createObject',storeNewObject(req,){
 
         // process the login form
         app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/login', // redirect back to the signup page if there is an error
+            successRedirect : '/home', // redirect to the secure profile section
+            failureRedirect : '/home', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
 
