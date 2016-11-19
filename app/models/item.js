@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 //********************************Schema*********************************
 var itemSchema = new mongoose.Schema({
-  user: { type: String, required:false},
+  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   title:{ type: String, required: true },
   description:{type: String, required: true },
   match:{
