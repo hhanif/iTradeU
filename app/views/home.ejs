@@ -52,27 +52,16 @@
       <% if (user.local.email) { %>
           <p><%= user.local.email %><br></p>
       <% } %>
-<a href="/createItem" class="btn btn-default"><span class="fa fa-user"></span> Post Item</a>
+
   </div>
 
       <div class="row">
         <!-- item -->
-
-        <!-- Object -->
-<% for(var i = 0; i < items.length; ++i){ %>
         <div class="col-sm-6">
             <div class="well">
-              <h3><%=items[i].title %></h3>
-              <ul>
-
-                  <li><p> <%=items[i].match.keyword1.original %></p></li>
-                  <li><%=items[i].match.keyword2.original %></li>
-                  <li><%=items[i].match.keyword3.original %></li>
-              </ul>
+              <p>Object 1</p>
             </div>
           </div>
-
-
             <div class="col-sm-6">
                 <div class="well">
                     <h3 class="text-primary"> Item #1</h3>
@@ -80,7 +69,63 @@
                 </div>
             </div>
           </div>
-      <% } %>
+        <!-- item -->
+        <div class="row">
+          <div class="col-sm-6">
+          <div class="well_one">
+            <p>Object 2</p>
+          </div>
+          </div>
+          <div class="col-sm-6">
+              <div class="well">
+                  <h3 class="text-primary"> Item #2</h3>
+                      <a href="/user/page" class="btn btn-primary">Connect</a>
+              </div>
+          </div>
+        </div>
+
+
+        <!-- item-->
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="well_two">
+              <p>Object 3</p>
+            </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="well">
+                    <h3 class="text-primary"> Item #3</h3>
+                        <a href="/user/page" class="btn btn-primary">Connect</a>
+                </div>
+            </div>
+          </div>
+        <!-- item -->
+        <div class="row">
+          <div class="col-sm-6">
+          <div class="well_three">
+            <p>Object 4</p>
+          </div>
+          </div>
+          <div class="col-sm-6">
+              <div class="well">
+                  <h3 class="text-primary"> Item #4</h3>
+                      <a href="/user/page" class="btn btn-primary">Connect</a>
+              </div>
+          </div>
+        </div>
+        <!-- item -->
+        <!-- THIS IS HOW YOU ADD AN ITEM WITHOUT ADDING ANOTHER OBJECT -->
+        <div class="row">
+          <div class="col-sm-6">
+          </div>
+          <div class="col-sm-6">
+              <div class="well">
+                  <h3 class="text-primary"> Item #5</h3>
+                      <a href="/user/page" class="btn btn-primary">Connect</a>
+              </div>
+          </div>
+        </div>
+
 
     <!-- LOGOUT BUTTON -->
     <div class="page-header text-center">
