@@ -40,9 +40,15 @@ app.post('/createItem',function(req,res){
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-      res.render('../app/views/profile.ejs', {
-            user : req.user
-        });
+    Item.find().where("user_id", req.user.ObjectId).exec(function(err, item) {
+        if(err) {
+            console.log(err);
+            res.status('400').send({error: err});
+        } else{
+            console.log('Found:', item);
+            res.render('../app/views/profile.ejs', {items: item,user:req.user});
+        }
+    });
     });
 
     // LOGOUT ==============================
