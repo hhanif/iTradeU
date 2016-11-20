@@ -59,6 +59,14 @@ app.post('/createItem',function(req,res){
         });
     });
 
+    //HOME PAGE ===================================
+    app.get('/home', isLoggedIn, function(req, res) {
+        res.render('../app/views/home.ejs', {
+            user : req.user,
+            item : req.item
+        });
+    });
+
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
         req.logout();
