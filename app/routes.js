@@ -28,7 +28,7 @@ app.post('/createItem',function(req,res){
     console.log('we fucked');}
 });
     console.log(newItem.title);
-    res.redirect('/profile');
+    res.redirect('/home');
 
 });
 // normal routes ===============================================================
@@ -39,16 +39,33 @@ app.post('/createItem',function(req,res){
     });
 
     // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, function(req, res) {
-      res.render('../app/views/profile.ejs', {
-            user : req.user
+    /*
+    app.get('/home', isLoggedIn, function(req, res) {
+    Item.find().where('user_id', req.user).exec(function(err, item) {
+        if(err) {
+            console.log(err);
+            res.status('400').send({error: err});
+        } else{
+            console.log('Found:', item);
+            res.render('../app/views/home.ejs', {items: item,user:req.user});
+        }
+    });
+    });
+*/
+/*    //HOME PAGE ===================================
+    app.get('/home', isLoggedIn, function(req, res) {
+        res.render('../app/views/home.ejs', {
+            user : req.user,
+            item : req.item
         });
     });
+*/
 
     //HOME PAGE ===================================
     app.get('/home', isLoggedIn, function(req, res) {
          res.sendFile(path.join(__dirname, '../public','/index.html'));
     });
+
 
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {
@@ -82,7 +99,7 @@ app.post('/createItem',function(req,res){
 
         // process the signup form
         app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
+            successRedirect : '/home', // redirect to the secure profile section
             failureRedirect : '/signup', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -95,7 +112,7 @@ app.post('/createItem',function(req,res){
         // handle the callback after facebook has authenticated the user
         app.get('/auth/facebook/callback',
             passport.authenticate('facebook', {
-                successRedirect : '/profile',
+                successRedirect : '/home',
                 failureRedirect : '/'
             }));
 
@@ -107,7 +124,7 @@ app.post('/createItem',function(req,res){
         // handle the callback after twitter has authenticated the user
         app.get('/auth/twitter/callback',
             passport.authenticate('twitter', {
-                successRedirect : '/profile',
+                successRedirect : '/home',
                 failureRedirect : '/'
             }));
 
@@ -120,7 +137,7 @@ app.post('/createItem',function(req,res){
         // the callback after google has authenticated the user
         app.get('/auth/google/callback',
             passport.authenticate('google', {
-                successRedirect : '/profile',
+                successRedirect : '/home',
                 failureRedirect : '/'
             }));
 
@@ -133,7 +150,7 @@ app.post('/createItem',function(req,res){
             res.render('../app/views/connect-local.ejs', { message: req.flash('loginMessage') });
         });
         app.post('/connect/local', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
+            successRedirect : '/home', // redirect to the secure profile section
             failureRedirect : '/connect/local', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
@@ -146,7 +163,7 @@ app.post('/createItem',function(req,res){
         // handle the callback after facebook has authorized the user
         app.get('/connect/facebook/callback',
             passport.authorize('facebook', {
-                successRedirect : '/profile',
+                successRedirect : '/home',
                 failureRedirect : '/'
             }));
 
@@ -158,7 +175,7 @@ app.post('/createItem',function(req,res){
         // handle the callback after twitter has authorized the user
         app.get('/connect/twitter/callback',
             passport.authorize('twitter', {
-                successRedirect : '/profile',
+                successRedirect : '/home',
                 failureRedirect : '/'
             }));
 
@@ -171,7 +188,7 @@ app.post('/createItem',function(req,res){
         // the callback after google has authorized the user
         app.get('/connect/google/callback',
             passport.authorize('google', {
-                successRedirect : '/profile',
+                successRedirect : '/home',
                 failureRedirect : '/'
             }));
 
@@ -188,7 +205,7 @@ app.post('/createItem',function(req,res){
         user.local.email    = undefined;
         user.local.password = undefined;
         user.save(function(err) {
-            res.redirect('/profile');
+            res.redirect('/home');
         });
     });
 
@@ -197,7 +214,7 @@ app.post('/createItem',function(req,res){
         var user            = req.user;
         user.facebook.token = undefined;
         user.save(function(err) {
-            res.redirect('/profile');
+            res.redirect('/home');
         });
     });
 
@@ -206,7 +223,7 @@ app.post('/createItem',function(req,res){
         var user           = req.user;
         user.twitter.token = undefined;
         user.save(function(err) {
-            res.redirect('/profile');
+            res.redirect('/home');
         });
     });
 
@@ -215,7 +232,7 @@ app.post('/createItem',function(req,res){
         var user          = req.user;
         user.google.token = undefined;
         user.save(function(err) {
-            res.redirect('/profile');
+            res.redirect('/home');
         });
     });
 
