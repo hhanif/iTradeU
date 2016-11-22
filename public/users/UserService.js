@@ -15,9 +15,14 @@
   function UserService($q){
     var users = [
       {
-        name: 'Haris Hanif',
+        name: 'Plane',
         avatar: 'svg-1',
         content: 'I want to trade my Nintendo Wii for an Xbox One.'
+      },
+      {
+        name: 'Car',
+        avatar: 'svg-1',
+        content: 'I want to .'
       }
     ];
 

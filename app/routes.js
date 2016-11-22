@@ -3,6 +3,11 @@ var path = require('path');
 var Item = require('./models/item');
 
 module.exports = function(app, passport) {
+
+  app.get('/user',function(req,res){
+    res.json({user:req.user});
+  });
+
 // Object routes===============================================================
 
 //Rendes createOjbect View

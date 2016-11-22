@@ -35,10 +35,15 @@
     <div flex layout="row">
 
         <md-sidenav  ng-click="ul.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
+          <md-button>
+            <md-icon md-svg-icon="public/assets/svg/avatar-1.svg" class="avatar"></md-icon>
+          <h3 ng-controller="PostsCtrl">{{posts.user.firstName}} </h3>
+        </md-button>
+        <hr width="300">
+        <center>  <h3> My Trade Items </h3></center>
           <md-list>
             <md-list-item ng-repeat="it in ul.users">
                 <md-button ng-click="ul.selectUser(it)" ng-class="{'selected' : it === ul.selected }">
-                  <md-icon md-svg-icon="{{it.avatar}}" class="avatar"></md-icon>
                   {{it.name}}
                 </md-button>
             </md-list-item>
@@ -68,7 +73,7 @@
 
     <script type="text/javascript">
 
-          angular
+          var app = angular
               .module('starterApp', ['ngMaterial', 'users'])
               .config(function($mdThemingProvider, $mdIconProvider){
 
@@ -86,6 +91,7 @@
                           .accentPalette('red');
 
               });
+              app.controller("PostsCtrl", function($scope, $http) { $http.get('/user'). success(function(data, status, headers, config) { $scope.posts= data; }); });
 
     </script>
 
