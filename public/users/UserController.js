@@ -3,7 +3,7 @@
   angular
        .module('users')
        .controller('UserController', [
-          'userService', '$mdSidenav', '$mdBottomSheet', '$timeout', '$log',
+          '$http', '$mdSidenav', '$mdBottomSheet', '$timeout', '$log',
           UserController
        ]);
 
@@ -13,7 +13,7 @@
    * @param avatarsService
    * @constructor
    */
-  function UserController( userService, $mdSidenav, $mdBottomSheet, $timeout, $log ) {
+  function UserController($http, $mdSidenav, $mdBottomSheet, $timeout, $log ) {
     var self = this;
 
     self.selected     = null;
@@ -23,13 +23,21 @@
     self.makeContact  = makeContact;
 
     // Load all registered users
+    $http.get('/items'). success(function(data, status, headers, config) {
+       self.users    = data.items;
+       self.selected = data.items[0];
+       console.log(data);
+       console.log(self.users);
+       console.log(self.selected);
+     });
 
+/*
     userService
           .loadAllUsers()
           .then( function( users ) {
             self.users    = [].concat(users);
             self.selected = users[0];
-          });
+          });*/
 
     // *********************************
     // Internal methods

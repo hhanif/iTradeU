@@ -44,19 +44,19 @@ app.post('/createItem',function(req,res){
     });
 
     // PROFILE SECTION =========================
-    /*
-    app.get('/home', isLoggedIn, function(req, res) {
-    Item.find().where('user_id', req.user).exec(function(err, item) {
+
+    app.get('/items', isLoggedIn, function(req, res) {
+      Item.find().where('user_id', req.user).exec(function(err, item) {
         if(err) {
             console.log(err);
             res.status('400').send({error: err});
         } else{
             console.log('Found:', item);
-            res.render('../app/views/home.ejs', {items: item,user:req.user});
+            res.json({items: item});
         }
     });
     });
-*/
+
 /*    //HOME PAGE ===================================
     app.get('/home', isLoggedIn, function(req, res) {
         res.render('../app/views/home.ejs', {
