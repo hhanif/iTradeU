@@ -7,6 +7,7 @@
           UserController
        ]);
 
+
   /**
    * Main Controller for the Angular Material Starter App
    * @param $mdSidenav
@@ -31,13 +32,6 @@
        console.log(self.selected);
      });
 
-/*
-    userService
-          .loadAllUsers()
-          .then( function( users ) {
-            self.users    = [].concat(users);
-            self.selected = users[0];
-          });*/
 
     // *********************************
     // Internal methods
@@ -55,7 +49,12 @@
      * @param menuId
      */
     function selectUser ( user ) {
-      self.selected = angular.isNumber(user) ? self.users[user] : user;
+      console.log(user);
+        $http.post('/match',user). success(function(data){
+          console.log(data);
+          self.selected = data.items;
+        });
+      //self.selected = angular.isNumber(user) ? self.users.items[user] : user;
     }
 
     /**

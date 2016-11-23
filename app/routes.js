@@ -57,6 +57,21 @@ app.post('/createItem',function(req,res){
     });
     });
 
+    app.post('/match', function(req, res) {
+          var mItem = req.user;
+          console.log(mItem);
+          //check if keyword1 matches title
+          Item.find().where('keyword1', mItem.title).exec(function(err, item) {
+            if(err) {
+                console.log(err);
+                res.status('400').send({error: err});
+            } else{
+                console.log('Found:', item);
+                res.json({items: item});
+            }
+          });
+        }
+    );
 /*    //HOME PAGE ===================================
     app.get('/home', isLoggedIn, function(req, res) {
         res.render('../app/views/home.ejs', {
