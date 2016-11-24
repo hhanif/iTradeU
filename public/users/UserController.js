@@ -26,7 +26,7 @@
     // Load all registered users
     $http.get('/items'). success(function(data, status, headers, config) {
        self.users    = data.items;
-       self.selected = data.items[0];
+       self.selected = data.items;
        console.log(data);
        console.log(self.users);
        console.log(self.selected);
@@ -48,11 +48,13 @@
      * Select the current avatars
      * @param menuId
      */
-    function selectUser ( user ) {
-      console.log(user);
-        $http.post('/match',user). success(function(data){
-          console.log(data);
-          self.selected = data.items;
+    function selectUser ( data ) {
+      console.log(data);
+      console.log(data.title);
+        $http.post('/match',data).success(function(dataR){
+          console.log("It went through");
+          console.log(dataR);
+          self.selected = dataR.items;
         });
       //self.selected = angular.isNumber(user) ? self.users.items[user] : user;
     }
