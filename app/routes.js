@@ -1,4 +1,5 @@
 var path = require('path');
+var jsonQuery = require('json-query');
 
 var Item = require('./models/item');
 
@@ -54,32 +55,8 @@ app.post('/createItem',function(req,res){
             console.log('Found:', item);
             res.json({items: item});
         }
+      });
     });
-    });
-
-    app.post('/match', function(req, res) {
-          var mItem = req.user;
-          console.log(mItem);
-          //check if keyword1 matches title
-          Item.find().where('keyword1', mItem.title).exec(function(err, item) {
-            if(err) {
-                console.log(err);
-                res.status('400').send({error: err});
-            } else{
-                console.log('Found:', item);
-                res.json({items: item});
-            }
-          });
-        }
-    );
-/*    //HOME PAGE ===================================
-    app.get('/home', isLoggedIn, function(req, res) {
-        res.render('../app/views/home.ejs', {
-            user : req.user,
-            item : req.item
-        });
-    });
-*/
 
     //HOME PAGE ===================================
     app.get('/home', isLoggedIn, function(req, res) {
@@ -256,8 +233,63 @@ app.post('/createItem',function(req,res){
         });
     });
 
+////////////////////////////////////////////////////////////
+////////////////// /MATCHING ITEMS ///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+
+//////////// helps define query
+var queryHelper = {
+    // narrows list of all items to items whose keywords fit title
+    wmatch: function(input, value){
+      var matchItemArray = [];
+      //check if each item isn't user's own, and one if its keyword matches users item
+      for (i=0; i <= value.length-1; i++){
+        if (value[i] === 'book') {                    //NEED TO REPLACE WITH title of current item
+          //console.log('Match found:', input[i]);
+          matchItemArray.push(input[i]);
+        };
+      };
+      console.log('\n',{itemsWhoseKeywordsFit: matchItemArray});
+      return matchItemArray;
+    },
+    //check if titles of the items left match any of my keywords
+    imatch: function(input, value){
+      var matchItemArray = [];
+      //check if each item isn't user's own, and matches a keyword of given
+      for (i=0; i <= value.length-1; i++){
+        if (input[i].user_id != '582fa1acd286c8144820365e' & value[i] === 'Scarf' | value[i] === '' | value[i] === '') {
+          //NEED TO REPLACE WITH keyword of items im interested in
+          matchItemArray.push(input[i]);
+        };
+      };
+      console.log('\n',{itemsWhoseTitlesMatchMyKeywords: matchItemArray});
+      return matchItemArray;
+    }
+  };
+
+/////////////get list of items and query them
+    app.post('/match', function(req, res) {
+
+      var jsonMatches;
+      Item.find().where().exec(function(err, item) {
+        if(err) {
+            console.log(err);
+            res.status('400').send({error: err});
+        } else {
+          console.log('first items first key:', item[0].match.keyword1.original);
+          wantMeList = jsonQuery(
+            ':wmatch({match.keyword1.original})|:wmatch({match.keyword2.original})|:wmatch({match.keyword3.original})',
+             {data: item, locals: queryHelper}).value;
+          iWantList = jsonQuery(':imatch({title})', {data: wantMeList, locals: queryHelper}).value;
+          console.log('\n!!!!MATCHED ITEMS!!!!:\n', iWantList)
+          res.json({matcheditems : iWantList});
+          }
+        });
+      });
 
 };
+
+///////////////////////////////////////////////////////////////////////////////////////
 
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
