@@ -55,8 +55,8 @@
           <md-list class="md-2-line">
             <md-list-item style="border:3px solid gray" ng-repeat="it in ul.selected" >
                 <md-icon style="padding=10px" md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
-                <h2 style="padding=15px">{{ul.selected.title}}</h2>
-                <p style="padding:10px">{{ul.selected.description}}</p>
+                <h2 style="padding=15px">{{it.title}}</h2>
+                <p style="padding:10px">{{it.description}}</p>
 
                 <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selected)" aria-label="Share with {{ ul.selected.name }}">
                   <md-icon md-svg-icon="share"></md-icon>
