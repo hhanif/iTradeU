@@ -22,6 +22,7 @@
     self.selectUser   = selectUser;
     self.toggleList   = toggleUsersList;
     self.makeContact  = makeContact;
+    self.logout       = logout;
 
     // Load all registered users
     $http.get('/items'). success(function(data, status, headers, config) {
@@ -87,6 +88,13 @@
           };
         }
     }
+
+    function logout(){
+      $http.get('/logout').success(
+        console.log("User logged out.")
+      );
+    }
+
 
   }
 
