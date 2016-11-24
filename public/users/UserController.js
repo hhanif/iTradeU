@@ -77,15 +77,10 @@
         function ContactSheetController( $mdBottomSheet ) {
           this.user = selectedUser;
           this.items = [
-            { name: 'Phone'       , icon: 'phone'       , icon_url: 'public/assets/svg/phone.svg'},
-            { name: 'Twitter'     , icon: 'twitter'     , icon_url: 'public/assets/svg/twitter.svg'},
-            { name: 'Google+'     , icon: 'google_plus' , icon_url: 'public/assets/svg/google_plus.svg'},
-            { name: 'Hangout'     , icon: 'hangouts'    , icon_url: 'public/assets/svg/hangouts.svg'}
+            { name: 'E-mail'       , icon: 'email'       , icon_url: '/public/assets/svg/envelope.svg'}
           ];
           this.contactUser = function(action) {
-            // The actually contact process has not been implemented...
-            // so just hide the bottomSheet
-
+              //show email
             $mdBottomSheet.hide(action);
           };
         }
