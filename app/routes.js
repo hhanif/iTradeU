@@ -59,9 +59,6 @@ app.post('/createItem',function(req,res){
       });
     });
 
-
-    });
-
     app.get('/profile', function(req, res) {
         res.render('../app/views/profile.ejs');
     });
@@ -119,7 +116,6 @@ app.post('/createItem',function(req,res){
         });
       });
 
-///////////////////////////////////////////////////////////////////////////////
 
     //HOME PAGE ===================================
     app.get('/home', isLoggedIn, function(req, res) {
@@ -295,6 +291,8 @@ app.post('/createItem',function(req,res){
             res.redirect('/home');
         });
     });
+
+};
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
