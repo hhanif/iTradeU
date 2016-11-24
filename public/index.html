@@ -42,7 +42,7 @@
     <div flex layout="row">
 
         <md-sidenav  ng-click="ul.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
-          <md-button>
+          <md-button ng-controller="profile">
             <md-icon md-svg-icon="public/assets/svg/avatar-1.svg" class="avatar"></md-icon>
           <h3 ng-controller="PostsCtrl">{{posts.user.firstName}} </h3>
         </md-button>
@@ -106,6 +106,9 @@
 
                 $http.get('/user'). success(function(data, status, headers, config) {
                    $scope.posts= data; }); });
+
+              app.controller("profile", function($http) {
+                $http.get('/profile'); });
 
     </script>
 

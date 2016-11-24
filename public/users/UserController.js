@@ -8,6 +8,7 @@
        ]);
 
 
+
   /**
    * Main Controller for the Angular Material Starter App
    * @param $mdSidenav
@@ -37,7 +38,7 @@
     // *********************************
     // Internal methods
     // *********************************
-
+    
     /**
      * Hide or Show the 'left' sideNav area
      */
