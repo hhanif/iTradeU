@@ -97,7 +97,7 @@
           controllerAs  : "vm",
           templateUrl   : 'public/users/contactSheet.html',
           controller    : [ '$mdBottomSheet', ContactSheetController],
-          parent        : angular.element(document.getElementById('content'))
+          parent        : angular.element(document.getElementById('content2'))
         }).then(function(clickedItem) {
           $log.debug( clickedItem.name + ' clicked!');
         });

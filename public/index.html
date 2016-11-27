@@ -45,16 +45,16 @@
     <div flex layout="row">
 
         <md-sidenav  ng-click="ul.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
-          <md-button ng-click="ul.profile()">
+          <center><md-button ng-click="ul.profile()">
             <md-icon md-svg-icon="public/assets/svg/avatar-1.svg" class="avatar"></md-icon>
           <h3 ng-controller="PostsCtrl">{{posts.user.firstName}} </h3>
-        </md-button>
+        </md-button></center>
         <hr width="300">
         <center>  <h3> My Trade Items </h3></center>
           <md-list>
             <md-list-item ng-repeat="it in ul.users">
                 <md-button ng-click="ul.selectItem(it)" >
-                  {{it.title}}
+                  <center>{{it.title}}</center>
                 </md-button>
             </md-list-item>
           </md-list>
@@ -69,7 +69,7 @@
           <md-list class="md-2-line" ng-show="ul.selected">
         </md-content>
 
-        <md-content ng-show="ul.selected" flex id="content">
+        <md-content style="padding:10px"ng-show="ul.selected" flex id="content2">
             <h1> Item Selected: </h1>
             <hr style="border-color:teal">
             <md-list-item style="border:3px solid teal">
@@ -98,6 +98,8 @@
                 <h2 ><b>Title:</b> {{match.title}}</h2>
                 <p><b>Description:</b> <br>{{match.description}}</p>
               </div>
+              <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selectedItem)" aria-label="Share with {{ ul.selectedItem.user_id.firstName }}">
+                  <md-icon md-svg-icon="share"></md-icon></md-button>
 
             </md-list-item>
 
