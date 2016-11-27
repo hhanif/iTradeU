@@ -22,6 +22,7 @@
     var self = this;
 
     self.matches = null;
+    self.itemSelected = null;
     self.selected     = false;
     self.users        = [ ];
     self.selectItem   = selectItem;
@@ -72,6 +73,7 @@
      * @param menuId
      */
     function selectItem ( data ) {
+      self.selectedItem =data;
       console.log("Data for match");
       console.log(data);
         $http.post('/match',data).success(function(dataR){

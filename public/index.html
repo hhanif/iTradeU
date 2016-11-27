@@ -65,16 +65,26 @@
           <md-list class="md-2-line">
 
             <md-list-item ng-show="!ul.selected" style="border:3px solid gray">
-                <h2 style="padding=15px">Select Item to Display Matches</h2>
+                <h1 style="padding=15px">Select an Item to Display Matches</h1>
+                <hr ng-show="!ul.selected">
+            </md-list-item>
+            <h1 ng-show="ul.selected"> Item Selected: </h1>
+            <hr ng-show="ul.selected">
+            <md-list-item ng-show="ul.selected"style="border:3px solid gray">
+                <md-icon style="padding=10px" md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
+
+                <h2 style="padding=15px">{{ul.selectedItem.title}}</h2>
+                <p style="padding:10px">{{ul.selectedItem.description}}</p>
 
             </md-list-item>
 
+            <h1 ng-show="ul.selected"> ({{ul.matches.length}}) Matches for Item: </h1>
+            <hr ng-show="ul.selected">
             <md-list-item ng-show="ul.selected"style="border:3px solid gray" ng-repeat="match in ul.matches">
                 <md-icon style="padding=10px" md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
                 <h2 style="padding=15px">{{match.title}}</h2>
                 <p style="padding:10px">{{match.description}}</p>
 
-                </md-button>
             </md-list-item>
 
           </md-list>
