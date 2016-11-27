@@ -30,7 +30,7 @@
         <md-icon md-svg-icon="menu" ></md-icon>
       </md-button>
 
-      <h1>iTradeU</h1>
+      <h1> iTradeU</h1>
 
      <md-button ng-click="ul.logout()" aria-label="Logout" align="right">
          Logout
@@ -60,30 +60,35 @@
           </md-list>
         </md-sidenav>
 
-        `<md-content ` flex id="content">
+        <md-content flex id="content" ng-show="!ul.selected" layout-xs="column" layout="row" layout-align="center center" >
 
-          <md-list class="md-2-line">
+          <div style="padding: 15px; border:3px solid teal; text-align:center" ng-show="!ul.selected" >
+          <h1 >Welcome to iTradeU</h1>
+          <h2> Select an item to view trade matches </h2>
+        </div>
+          <md-list class="md-2-line" ng-show="ul.selected">
+        </md-content>
 
-            <md-list-item ng-show="!ul.selected" style="border:3px solid gray">
-                <h1 style="padding=15px">Select an Item to Display Matches</h1>
-                <hr ng-show="!ul.selected">
-            </md-list-item>
-            <h1 ng-show="ul.selected"> Item Selected: </h1>
-            <hr ng-show="ul.selected">
-            <md-list-item ng-show="ul.selected"style="border:3px solid gray">
+        <md-content ng-show="ul.selected" flex id="content">
+            <h1> Item Selected: </h1>
+            <hr style="border-color:teal">
+            <md-list-item style="border:3px solid teal">
                 <md-icon style="padding=10px" md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
 
-                <h2 style="padding=15px">{{ul.selectedItem.title}}</h2>
-                <p style="padding:10px">{{ul.selectedItem.description}}</p>
+                <h2 style="padding=15px">Title: {{ul.selectedItem.title}}</h2>
+                <p style="padding:10px">Description: {{ul.selectedItem.description}}</p>
+                <p style="padding:10px">Keyword: {{ul.selectedItem.match.keyword1.original}}</p>
+                <p style="padding:10px">Keyword: {{ul.selectedItem.match.keyword2.original}}</p>
+                <p style="padding:10px">Keyword: {{ul.selectedItem.match.keyword3.original}}</p>
 
             </md-list-item>
 
-            <h1 ng-show="ul.selected"> ({{ul.matches.length}}) Matches for Item: </h1>
-            <hr ng-show="ul.selected">
-            <md-list-item ng-show="ul.selected"style="border:3px solid gray" ng-repeat="match in ul.matches">
+            <h1> ({{ul.matches.length}}) Matches for Item: </h1>
+            <hr style="border-color:teal">
+            <md-list-item style="border:3px solid teal" ng-repeat="match in ul.matches">
                 <md-icon style="padding=10px" md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
-                <h2 style="padding=15px">{{match.title}}</h2>
-                <p style="padding:10px">{{match.description}}</p>
+                <h2 style="padding=15px">Title: {{match.title}}</h2>
+                <p style="padding:10px">Description: {{match.description}}</p>
 
             </md-list-item>
 
