@@ -9,36 +9,57 @@
 
 
 
+
+
   /**
    * Main Controller for the Angular Material Starter App
    * @param $mdSidenav
    * @param avatarsService
    * @constructor
    */
-  function UserController($http, $mdSidenav, $mdBottomSheet, $timeout, $log ) {
+  function UserController($http, $mdSidenav, $mdBottomSheet, $timeout, $log) {
+
     var self = this;
 
-    self.selected     = null;
+    self.matches = null;
+    self.selected     = false;
     self.users        = [ ];
-    self.selectUser   = selectUser;
+    self.selectItem   = selectItem;
     self.toggleList   = toggleUsersList;
     self.makeContact  = makeContact;
-    self.logout       = logout;
+    self.logout = logout;
+    self.profile = profile;
+    self.createItem = createItem;
+
 
     // Load all registered users
     $http.get('/items'). success(function(data, status, headers, config) {
        self.users    = data.items;
-       self.selected = data.items;
        console.log(data);
        console.log(self.users);
-       console.log(self.selected);
+       console.log("Selected is: "+self.selected);
      });
 
+   function profile() {
+     console.log("Redirected to update profile");
+           location.pathname='/profile'
 
+            }
+
+    function createItem() {
+      console.log("Redirected to createItem");
+                    location.pathname='/createItem'
+    }
+
+    function logout() {
+      console.log("Logged out of home");
+      location.pathname='/logout'
+
+    }
     // *********************************
     // Internal methods
     // *********************************
-    
+
     /**
      * Hide or Show the 'left' sideNav area
      */
@@ -50,15 +71,19 @@
      * Select the current avatars
      * @param menuId
      */
-    function selectUser ( data ) {
+    function selectItem ( data ) {
+      console.log("Data for match");
       console.log(data);
-      console.log(data.title);
         $http.post('/match',data).success(function(dataR){
-          console.log("It went through");
-          console.log(dataR);
-          self.selected = dataR.items;
+          console.log("Match Data Received");
+          console.log(dataR.matcheditems);
+          console.log(dataR.matcheditems[0]);
+          self.matches = dataR.matcheditems;
+          self.selected = true;
+          console.log("Selected is: "+self.selected);
+
+
         });
-      //self.selected = angular.isNumber(user) ? self.users.items[user] : user;
     }
 
     /**
@@ -90,11 +115,7 @@
         }
     }
 
-    function logout(){
-      $http.get('/logout').success(
-        console.log("User logged out.")
-      );
-    }
+
 
 
   }
