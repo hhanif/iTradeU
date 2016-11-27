@@ -73,22 +73,31 @@
             <h1> Item Selected: </h1>
             <hr style="border-color:teal">
             <md-list-item style="border:3px solid teal">
-                <md-icon style="padding=10px" md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
-
-                <h2 style="padding=15px">Title: {{ul.selectedItem.title}}</h2>
-                <p style="padding:10px">Description: {{ul.selectedItem.description}}</p>
-                <p style="padding:10px">Keyword: {{ul.selectedItem.match.keyword1.original}}</p>
-                <p style="padding:10px">Keyword: {{ul.selectedItem.match.keyword2.original}}</p>
-                <p style="padding:10px">Keyword: {{ul.selectedItem.match.keyword3.original}}</p>
-
+              <div style="width:30%">
+                <md-icon  md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
+              </div>
+              <div style="width:70%">
+                <h2><b>Title:</b> {{ul.selectedItem.title}}</h2>
+                <p><b>Description:</b> <br>{{ul.selectedItem.description}}</p>
+                <p><b>Matching Criteria:</b></p>
+                <ul>
+                <li><b>Keyword 1:</b> {{ul.selectedItem.match.keyword1.original}}</li>
+                <li><b>Keyword 2:</b> {{ul.selectedItem.match.keyword2.original}}</li>
+                <li><b>Keyword 3:</b> {{ul.selectedItem.match.keyword3.original}}</li>
+              </ul>
+              </div>
             </md-list-item>
 
             <h1> ({{ul.matches.length}}) Matches for Item: </h1>
             <hr style="border-color:teal">
             <md-list-item style="border:3px solid teal" ng-repeat="match in ul.matches">
-                <md-icon style="padding=10px" md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
-                <h2 style="padding=15px">Title: {{match.title}}</h2>
-                <p style="padding:10px">Description: {{match.description}}</p>
+              <div style="width:30%">
+                <md-icon  md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
+              </div>
+              <div style="width:70%">
+                <h2 ><b>Title:</b> {{match.title}}</h2>
+                <p><b>Description:</b> <br>{{match.description}}</p>
+              </div>
 
             </md-list-item>
 
