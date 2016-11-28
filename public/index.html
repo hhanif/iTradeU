@@ -30,13 +30,12 @@
         <md-icon md-svg-icon="menu" ></md-icon>
       </md-button>
 
-      <h1> iTradeU</h1>
-
+     <h1 style="padding:15px;color: white">iTradeU</h1>
      <md-button ng-click="ul.logout()" aria-label="Logout" align="right">
-         Logout
+         <h4 style="color: white">Logout </h4>
       </md-button>
       <md-button ng-click="ul.createItem()" aria-label="CreateItem" align="right">
-          Add Item
+        <h4 style="color: white">  Add Item </h4>
        </md-button>
 
 
@@ -44,62 +43,63 @@
 
     <div flex layout="row">
 
-        <md-sidenav  ng-click="ul.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
+        <md-sidenav  style="background-color:#e28484"ng-click="ul.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="md-whiteframe-z2" >
           <center><md-button ng-click="ul.profile()">
             <md-icon md-svg-icon="public/assets/svg/avatar-1.svg" class="avatar"></md-icon>
-          <h3 ng-controller="PostsCtrl">{{posts.user.firstName}} </h3>
+          <h2 style="color:white" ng-controller="PostsCtrl">{{posts.user.firstName}} </h2>
         </md-button></center>
-        <hr width="300">
-        <center>  <h3> My Trade Items </h3></center>
+        <hr style="color:white" width="300">
+        <center>  <h2 style="color:white"> My Trade Items </h2></center>
           <md-list>
             <md-list-item ng-repeat="it in ul.users">
                 <md-button ng-click="ul.selectItem(it)" >
-                  <center>{{it.title}}</center>
+                  <center style="color:white">{{it.title}}</center>
                 </md-button>
             </md-list-item>
           </md-list>
         </md-sidenav>
 
-        <md-content flex id="content" ng-show="!ul.selected" layout-xs="column" layout="row" layout-align="center center" >
+        <md-content style="background-color:#f4d1d1"flex id="content" ng-show="!ul.selected" layout-xs="column" layout="row" layout-align="center center" >
 
-          <div style="padding: 15px; border:3px solid teal; text-align:center" ng-show="!ul.selected" >
-          <h1 >Welcome to iTradeU</h1>
-          <h2> Select an item to view trade matches </h2>
+          <div style="padding: 15px;background-color:white; text-align:center;border-radius: 20px;box-shadow: 5px 5px 2.5px #a5a5a5" ng-show="!ul.selected" >
+          <h1 style="color:#6f6f6f">Welcome to iTradeU</h1>
+          <h2 style="color:#6f6f6f"> Select an item to view trade matches </h2>
         </div>
           <md-list class="md-2-line" ng-show="ul.selected">
         </md-content>
 
-        <md-content style="padding:10px"ng-show="ul.selected" flex id="content2">
-            <h1> Item Selected: </h1>
-            <hr style="border-color:teal">
-            <md-list-item style="border:3px solid teal">
+        <md-content style="padding:10px; background-color:#f4d1d1"ng-show="ul.selected" flex id="content2">
+            <h1 style="color:#6f6f6f"> Item Selected: </h1>
+            <hr style="border-color:#6f6f6f">
+            <md-list-item style="background-color:white ;border-radius: 20px;  box-shadow: 5px 5px 2.5px #a5a5a5" >
               <div style="width:30%">
                 <md-icon  md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
               </div>
               <div style="width:70%">
-                <h2><b>Title:</b> {{ul.selectedItem.title}}</h2>
-                <p><b>Description:</b> <br>{{ul.selectedItem.description}}</p>
-                <p><b>Matching Criteria:</b></p>
+                <h2 style="color:#6f6f6f"><b>Title:</b> {{ul.selectedItem.title}}</h2>
+                <p style="color:#6f6f6f"><b>Description:</b> <br>{{ul.selectedItem.description}}</p>
+                <p style="color:#6f6f6f"><b>Matching Criteria:</b></p>
                 <ul>
-                <li><b>Keyword 1:</b> {{ul.selectedItem.match.keyword1.original}}</li>
-                <li><b>Keyword 2:</b> {{ul.selectedItem.match.keyword2.original}}</li>
-                <li><b>Keyword 3:</b> {{ul.selectedItem.match.keyword3.original}}</li>
+                <li style="color:#6f6f6f"><b>Keyword 1:</b> {{ul.selectedItem.match.keyword1.original}}</li>
+                <li style="color:#6f6f6f"><b>Keyword 2:</b> {{ul.selectedItem.match.keyword2.original}}</li>
+                <li style="color:#6f6f6f"><b>Keyword 3:</b> {{ul.selectedItem.match.keyword3.original}}</li>
               </ul>
               </div>
             </md-list-item>
 
-            <h1> ({{ul.matches.length}}) Matches for Item: </h1>
-            <hr style="border-color:teal">
-            <md-list-item style="border:3px solid teal" ng-repeat="match in ul.matches">
+            <h1 style="color:#6f6f6f"> ({{ul.matches.length}}) Matches for Item: </h1>
+            <hr style="border-color:#6f6f6f">
+            <md-list-item style="background-color:white ;border-radius: 20px; box-shadow: 5px 5px 2.5px #a5a5a5" ng-repeat="match in ul.matches">
               <div style="width:30%">
                 <md-icon  md-svg-icon="public/assets/svg/package.svg" class="md-avatar-icon"></md-icon>
               </div>
               <div style="width:70%">
-                <h2 ><b>Title:</b> {{match.title}}</h2>
-                <p><b>Description:</b> <br>{{match.description}}</p>
+                <h2 style="color:#6f6f6f"><b>Title:</b> {{match.title}}</h2>
+                <p style="color:#6f6f6f"><b>Description:</b> <br>{{match.description}}</p>
+                <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selectedItem)" aria-label="Share with {{ ul.selectedItem.user_id.firstName }}">
+                    <md-icon md-svg-icon="share"></md-icon></md-button>
               </div>
-              <md-button class="share" md-no-ink ng-click="ul.makeContact(ul.selectedItem)" aria-label="Share with {{ ul.selectedItem.user_id.firstName }}">
-                  <md-icon md-svg-icon="share"></md-icon></md-button>
+
 
             </md-list-item>
 
