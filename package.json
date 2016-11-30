@@ -20,7 +20,7 @@
     "node": "4.6.0"
   },
   "scripts": {
-    "tests": "mocha test.js"
+    "test": "mocha test.js"
   },
   "dependencies": {
     "express": "~4.14.0",
@@ -40,6 +40,7 @@
     "express-session": "~1.14.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "mocha": "^3.1.2"
   }
 }

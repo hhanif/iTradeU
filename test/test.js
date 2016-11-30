@@ -1,26 +1,23 @@
-var itradeu = require('./server');
-var expect = require('chai').expect;
+function test(){
+  "use strict";
+  var a = 1;
+}
 
-process.env.NODE_ENV='test';
+process.env.NODE_ENV = 'test';
+
+var mongoose = require("mongoose");
 var item = require('./app/models/item');
 
 var chai = require('chai');
-
-var mongoose = require('mongoose');
 var chaiHttp = require('chai-http');
+var server = require('./server');
 var should = chai.should();
-var server=require('./server');
+
 chai.use(chaiHttp);
-module.exports= server
 if(!module.parent){
-	app.listen(8080);
+  app.listen(8080);
 };
 
-describe('iTradeU-name',function(){
-	it('website name is iTradeU!',function(){
-	expect(true).to.be.true;
-	});
-});
 describe('/POST item',()=> {
   it('It should post an item', (done)=>{
   var item = {
@@ -63,13 +60,5 @@ describe('/POST item',()=> {
   res.body.item.should.have.property('keyword3');
   done();
   });
->>>>>>> 13777a0001f918ae950bf74b810e9dec04514c05
   });
-
-});
-
-describe('iTradeU-name',function(){
-    it('website name is iTradeU!',function(){
-    expect(true).to.be.true;
-    });
 });
