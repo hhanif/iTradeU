@@ -1,61 +1,44 @@
-function test(){
-  "use strict";
-  let a = 1;
-}
+var itradeu = require('./server');
+var expect = require('chai').expect;
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV='test';
+var item = require('./app/models/item');
 
-let mongoose = require("mongoose");
-let item = require('../app/models/item');
-
-let chai = require('chai');
-let chaiHttp = require('chai-http');
-let server = require('../server');
-let should = chai.should();
-
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var should = chai.should();
+var server=require('./server');
 chai.use(chaiHttp);
+module.exports= server
+if(!module.parent){
+    app.listen(8080);
+};
+describe('Item', () => {
+    beforeEach((done) => { //Before each test we empty the database
+        Item.remove({}, (err) => {
+           done();
+        });
+    });
+/*
+  * Test the /GET route
+  */
+  describe('/GET Item', () => {
+      it('it should GET all the item', (done) => {
+        chai.request(server)
+            .get('/Item')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.length.should.be.eql(0);
+              done();
+            });
+      });
+  });
 
-describe('/POST item',()=> {
-  it('It should post an item', (done)=>{
-  let item = {
-    title: "food",
-    description: "food",
-    keyword1: "chicken",
-    keyword2: "meat",
-    keyword3: "food",
-  }
-  chai.request(server)
-  .post('/item')
-  .send(item)
-  .end((err,res)=>{
-    res.should.have.status(200);
-    res.body.should.have.a('object');
-    res.body.errors.should.have.property('pages');
-    res.body.errors.pages.should.have.property('kind').eql('required');
-    done();
-  });
-  });
-  it('it should POST an item',(done)=>{
-  let item = {
-    title: "food",
-    description: "food",
-    keyword1: "chicken",
-    keyword2: "meat",
-    keyword3: "food",
-  }
-  chai.request(sever)
-  .post('/item')
-  .send(item)
-  .end((err, res)=>{
-  res.should.have.status(200);
-  res.body.should.have.a('object');
-  res.body.errors.should.have.property('message').eql('item successfully added!');
-  res.body.item.should.have.property('title');
-  res.body.item.should.have.property('description');
-  res.body.item.should.have.property('keyword1');
-  res.body.item.should.have.property('keyword2');
-  res.body.item.should.have.property('keyword3');
-  done();
-  });
-  });
+});
+
+describe('iTradeU-name',function(){
+    it('website name is iTradeU!',function(){
+    expect(true).to.be.true;
+    });
 });
