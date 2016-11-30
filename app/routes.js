@@ -78,36 +78,55 @@ app.post('/createItem',function(req,res){
             res.status('400').send({error: err});
         } else {
           wantMeList = jsonQuery(
-            ':wmatch({match.keyword1.original}):|:wmatch({match.keyword2.original})|:wmatch({match.keyword3.original})',
+            ':wmatch({match})',
              {data: item, locals: {
-
                        // narrows list of all items to items whose keywords fit title
                        wmatch: function(input, value){
+
                          var matchItemArray = [];
                          //check if each item isn't user's own, and one if its keyword matches users item
                          for (i=0; i <= value.length-1; i++){
-                           if (value[i] === req.body.title) {
+                           console.log('========================Potential Matches, from item:', item[i], '============================================');
+
+                           if (value[i].keyword1.original === req.body.title) {
                              //console.log('Match found:', input[i]);
                              matchItemArray.push(input[i]);
+                             console.log("KEYWORD 1 MATCH");
                            };
+                           if (value[i].keyword2.original === req.body.title) {
+                             //console.log('Match found:', input[i]);
+                             matchItemArray.push(input[i]);
+                             console.log("KEYWORD 2 MATCH");
+                           };
+                           if (value[i].keyword3.original === req.body.title) {
+                             //console.log('Match found:', input[i]);
+                             matchItemArray.push(input[i]);
+                             console.log("KEYWORD 3 MATCH");
+                           };
+
+                           console.log("DOES value.keyword1.original = title?", value[i].keyword1.original, " =?", req.body.title);
+                           console.log("DOES value.keyword3.original = title?", value[i].keyword3.original, " =?", req.body.title);
+                           console.log("DOES value.keyword2.original = title?", value[i].keyword2.original, " =?", req.body.title);
+
                          };
-                         console.log('\n',{itemsWhoseKeywordsFit: matchItemArray});
+                         console.log('\n=======\n',{itemsWhoseKeywordsFit: matchItemArray}, '\n===================');
                          return matchItemArray;
                        }
 
              }}).value;
           iWantList = jsonQuery(':imatch({title})', {data: wantMeList, locals:{
-
                         //check if titles of the items left match any of my keywords
                         imatch: function(input, value){
+                          //console.log('Potential Matches, want me:', wantMeList, "KEYWORDS:", wantMeList.keyword1.original, ",", wantMeList.keyword2.original, ",", wantMeList.keyword3.original);
                           var matchItemArray = [];
                           //check if each item isn't user's own, and matches a keyword of given
                           for (i=0; i <= value.length-1; i++){
+                            console.log('=====================Potential Matches, from wantMeList:', wantMeList[i], '============================================');
                             if (input[i].user_id != req.body.user_id & value[i] === req.body.match.keyword1.original | value[i] === req.body.match.keyword2.original | value[i] === req.body.match.keyword3.original) {
                               matchItemArray.push(input[i]);
                             };
                           };
-                          console.log('\n',{itemsWhoseTitlesMatchMyKeywords: matchItemArray});
+                          console.log('\n=======\n',{itemsWhoseTitlesMatchMyKeywords: matchItemArray}, '\n======================================\n');
                           return matchItemArray;
                         }
 

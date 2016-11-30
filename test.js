@@ -1,26 +1,50 @@
-var itradeu = require('./server');
+var itradeu = require('./server.js');
 var expect = require('chai').expect;
-
+var http = require('http');
 process.env.NODE_ENV='test';
-var item = require('./app/models/item');
+var item = require('./app/models/item.js');
+
+var request = require("request");
+var base_url = "http://localhost:8080/"
+var assert = require('assert');
 
 var chai = require('chai');
-
 var mongoose = require('mongoose');
 var chaiHttp = require('chai-http');
 var should = chai.should();
-var server=require('./server');
+//var app = require('./server');
+//var server=http.createServer(app); server.address()
 chai.use(chaiHttp);
-module.exports= server
+//module.exports= server
 if(!module.parent){
-	app.listen(8080);
+    app.listen(8080);
 };
 
 describe('iTradeU-name',function(){
-	it('website name is iTradeU!',function(){
-	expect(true).to.be.true;
-	});
+    it('website name is iTradeU!',function(){
+    expect(true).to.be.true;
+    });
 });
+/*
+describe("iTradeU",function(){
+    describe("Get /",function(){
+        it("returns status code 200",function(){
+            request.get(base_url,function(error,response,body){
+                assert.equal(200,response.statusCode);
+                done();
+            });
+        });
+    });
+});
+*/
+//describe('Local sign-up',function(){
+    //it('The sign up works!',function(){
+
+//    })
+//})
+
+
+
 describe('/POST item',()=> {
   it('It should post an item', (done)=>{
   var item = {
@@ -63,13 +87,5 @@ describe('/POST item',()=> {
   res.body.item.should.have.property('keyword3');
   done();
   });
->>>>>>> 13777a0001f918ae950bf74b810e9dec04514c05
   });
-
-});
-
-describe('iTradeU-name',function(){
-    it('website name is iTradeU!',function(){
-    expect(true).to.be.true;
-    });
 });
